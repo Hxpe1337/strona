@@ -77,7 +77,7 @@ const questions = [
   
   function checkAndDisplayImage() {
     const image = document.getElementById("special-image");
-    if (currentQuestionIndex == 6) { 
+    if (currentQuestionIndex == 26) { 
       image.style.display = "block";
       // Ustaw timer, który ukryje obrazek po 0.5 sekundy (500 milisekund)
       setTimeout(function() {
