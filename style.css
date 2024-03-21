@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+
+  @font-face {
+    font-family: 'montserrat';
+    src:     url('fonts/Montserrat-SemiBold.ttf') format('truetype');
+    font-style: normal;
+  }
+    
+body, html {
+  margin: 0;
+  font-family: 'montserrat', sans-serif;
+  color: white;
+  margin: 0; /* Usuwa domyślne marginesy */
+  padding: 0; /* Usuwa domyślne paddingi */
+  box-sizing: border-box; /* Zapewnia, że padding i border są wliczane do szerokości i wysokości elementu */
+  transition: none; /* Usuń niepotrzebne przejście, jeśli było dodane */
+  background-color: #191919;
+}
+.highlighted {
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 0 4px; /* Dodaje trochę miejsca po bokach */
+  font-family: 'montserrat', sans-serif; /* Możesz wybrać inną czcionkę */
+}
+#background-video {
+  position: fixed; /* Pozycja względem viewportu */
+  right: 0;
+  bottom: 0;
+  min-width: 100%; /* Minimalna szerokość 100% viewportu */
+  min-height: 100%; /* Minimalna wysokość 100% viewportu */
+  width: auto; /* Szerokość auto, aby zachować proporcje */
+  height: auto; /* Wysokość auto, aby zachować proporcje */
+  z-index: -100; /* Umieszczenie filmu pod innymi elementami */
+  filter: blur(10px) grayscale(100%); /* Rozmycie i konwersja do skali szarości */
+  object-fit: cover; /* Zapewnienie pokrycia całego obszaru */
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Domyślnie jest to row, więc zmieniamy na column dla pionowego układu */
+  justify-content: center; /* Wyśrodkowanie pionowo */
+  align-items: center; /* Wyśrodkowanie poziomo, jeśli flex-direction to column */
+}
+  .quiz-container, #prize-levels {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  #prize-levels {
+    margin-left: 20px;
+  }
+  
+  #prizes-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #prizes-list li {
+    padding: 5px;
+    margin: 5px 0;
+  }
+  
+  #prizes-list li.active {
+    background-color: lightgreen;
+  }
+  
+.quiz-container {
+  margin-top: 200px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px;
+  background-color: #1e1e1e; /* Jeszcze ciemniejsze tło dla kontenera quizu */
+  border-radius: 8px;
+  border: 2px solid #555555;
+
+  height: 200px;
+}
+  
+  #nickname-form {
+    text-align: center;
+    margin-top: 50px;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  #special-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%; /* Rozciągnięcie szerokości obrazu na całą szerokość */
+    height: auto; /* Usunięcie ustawienia wysokości pozwoli na rozciągnięcie w pionie */
+    object-fit: cover; /* Rozciągnięcie obrazka aby pokrył całą dostępną przestrzeń */
+  }
+  
+  
+  #nickname-input, #nickname-form button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  #nickname-input {
+    background-color: #333333; /* Ciemne tło dla inputu */
+    color: #ffffff; /* Biały tekst */
+  }
+  
+  #nickname-form button {
+    background-color: #007bff; /* Niebieski kolor przycisku */
+    color: #ffffff; /* Biały tekst */
+    cursor: pointer;
+  }
+  
+  #nickname-form button:hover {
+    background-color: #0056b3; /* Ciemniejszy niebieski przy hover */
+  }
+  
+  #question {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dwie kolumny */
+    gap: 10px;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .answer-btn {
+    background-color: #333333;
+    border: 2px solid #555555;
+    color: #ffffff;
+    border-radius:10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    animation: fadeIn 0.5s ease-out;
+
+  }
+  .answer-btn:active {
+    transform: scale(0.98); /* Lekkie zmniejszenie przycisku */
+  }
+  .answer-btn:hover {
+    background-color: #414141; /* Niebieskie tło przy hover */
+    transform: translateY(-2px); /* Lekkie podniesienie przycisku */
+  }
+  
+  .answer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .life-icon {
+    width: 50px; /* Ustawienie szerokości ikony */
+    height: 50px; /* Ustawienie wysokości ikony */
+    margin-right: 5px; /* Dodanie marginesu z prawej strony dla odstępu */
+  }
+  
+  #glow-effect {
+    display: none; /* Początkowo ukryty */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999; /* Upewniamy się, że jest nad wszystkimi innymi elementami, ale poniżej modali/alertów */
+    pointer-events: none; /* Umożliwia klikanie przez warstwę */
+    /* Usunięcie box-shadow stąd */
+    border-radius: 0px; /* Jeśli potrzebujesz zaokrąglonych krawędzi */
+    animation: glowAnimation 1s ease-in-out infinite; /* Zastosowanie animacji */
+}
+
+
+@keyframes glowAnimation {
+    0%, 100% {
+        box-shadow: inset 0 0 15px 5px rgba(255, 0, 0, 0);
+    }
+    50% {
+        box-shadow: inset 0 0 30px 10px rgba(255, 0, 0, 0.7);
+    }
+}
+
+
+#correct-glow {
+
+
+  display: none; /* Początkowo ukryty */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999; /* Upewniamy się, że jest nad wszystkimi innymi elementami, ale poniżej modali/alertów */
+  pointer-events: none; /* Umożliwia klikanie przez warstwę */
+  /* Usunięcie box-shadow stąd */
+  border-radius: 0px; /* Jeśli potrzebujesz zaokrąglonych krawędzi */
+  animation: correctGlow 1s ease-in-out infinite; /* Zastosowanie animacji */
+}
+
+
+@keyframes correctGlow {
+  0%, 100% {
+      box-shadow: inset 0 0 15px 5px rgba(0, 255, 0, 0.2);
+  }
+  50% {
+      box-shadow: inset 0 0 30px 10px rgba(0, 255, 0, 0.5); 
+  }
+}
+
+
+
+
+
+
+@keyframes crawl {
+  0% {
+    top: 100%;
+    transform: rotateX(20deg) translateZ(0);
+  }
+  100% {
+    top: -600%;
+    transform: rotateX(25deg) translateZ(-2500px);
+  }
+}
+
+.crawl-container {
+  position: absolute;
+  bottom: 0;
+  perspective: 300px;
+  width: 100%;
+  overflow: hidden;
+  height: 800px; /* Dostosuj do wysokości ekranu */
+  transform: rotateX(20deg);
+  transform-origin: 50% 100%;
+  z-index: 1000;
+}
+
+.crawl-content {
+  position: relative;
+  top: 100%;
+  animation: crawl 60s linear; /* Dostosuj czas trwania do potrzeb */
+}
+
+
+
+
+
+
+
+
+
+#message-container {
+    position: fixed; /* Lub 'absolute', zależnie od layoutu */
+    top: 50%;
+    left: 50%;
+    color:white;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background-color: #191919;
+    border: 2px solid #555555;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  #message-container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #202020;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s ease-in;
+  }
+  #message-container button:hover {
+
+    background-color: #333333;
+
+  }
+  .blur-effect {
+    filter: blur(5px);
+  }
+  #message-container.visible {
+    animation: popIn 0.5s forwards;
+  }
+  
+  /* Dodaj klasę .hidden do kontenera wiadomości, gdy ma zniknąć */
+  #message-container.hidden {
+    animation: fadeOut 0.5s forwards;
+  }
+
+  /* Style dla formularza startowego */
+#start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #292929; /* Ciemne tło dla formularza */
+  border-radius: 10px;
+  border: 1px solid #555;
+  
+}
+
+#start-screen h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+#nickname-input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+}
+
+#start-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #ff5050;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  animation: pulse 2s infinite;
+
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+#start-btn:hover {
+  background-color: #d83c3c;
+}
+#starfall {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Aby spadające gwiazdy były za treścią strony */
+  pointer-events: none; /* Umożliwia interakcje z elementami pod spodem */
+}
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milionerzy</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="starfall"></div>
+  <div id="message-container" style="display: none;">
+    <img src="sad.png" alt="smutny" style="width: 200px;">
+    <p id="message-text"></p>
+    <button onclick="restartGame()">Spróbuj ponownie</button>
+  </div>
+  <div class="container">
+    <div id="start-screen">
+      <h1>Witaj w grze "Milionerzy"!</h1>
+      <input type="text" id="nickname-input" placeholder="Wpisz swój nick">
+      <button id="start-btn" onclick="startGame()">Rozpocznij grę</button>
+    </div>
+    <div id="nickname-form" style="display: none;">
+      <button onclick="startGame()">Start</button>
+    </div>
+  
+  <div class="quiz-container" style="display: none;">
+    <div id="quiz">
+      <div class="progress" id="progress">Odpowiedziano 0 z 0 pytań</div>
+      <img src="img.png" alt="Special Image" id="special-image" style="display: none;">
+
+      <h2 id="question">Pytanie?</h2>
+      <div class="buttons">
+        <button class="answer-btn" onclick="selectAnswer(0)">Odp A</button>
+        <button class="answer-btn" onclick="selectAnswer(1)">Odp B</button>
+        <button class="answer-btn" onclick="selectAnswer(2)">Odp C</button>
+        <button class="answer-btn" onclick="selectAnswer(3)">Odp D</button>
+      </div>
+      <audio id="wrong-answer-sound" src="wrong.mp3" preload="auto"></audio>
+      <audio id="correct-answer-sound" src="correct.mp3" preload="auto"></audio>
+
+    </div>
+    <div  style="margin-top: 25px;" id="lives-container">
+      <span id="lives"></span>
+    </div>
+  </div>
+</div>
+
+<div id="correct-glow" style="display:none;"></div>
+<div id="glow-effect" style="display:none;"></div>
+
+  
+<script src="script.js"></script>
+</body>
+</html>
