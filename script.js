@@ -75,16 +75,7 @@ const questions = [
     }, 60000); // 60 sekund to czas trwania animacji przewijania tekstu
   }
   
-  function checkAndDisplayImage() {
-    const image = document.getElementById("special-image");
-    if (currentQuestionIndex == 26) { 
-      image.style.display = "block";
-      // Ustaw timer, który ukryje obrazek po 0.5 sekundy (500 milisekund)
-      setTimeout(function() {
-        image.style.display = "none";
-      }, 100);
-    }
-  }
+  
   
   
   function selectAnswer(answerIndex) {
@@ -92,7 +83,7 @@ const questions = [
     const buttons = document.querySelectorAll(".answer-btn");
 
     if (answerIndex === question.correct) {
-        checkAndDisplayImage(); // Wywołanie funkcji tutaj
+        // Wywołanie funkcji tutaj
         const correctSound = document.getElementById('correct-answer-sound');
         correctSound.play();
         score++; // Zwiększ punkty za poprawną odpowiedź
